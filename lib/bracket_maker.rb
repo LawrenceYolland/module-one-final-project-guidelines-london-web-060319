@@ -1,5 +1,7 @@
-require_relative '../config/access.rb'
+require_relative '../bin/access.rb'
 require_relative '../lib/assign_goals.rb'
+require 'catpix'
+
 Challonge::API.username = Access.username
 Challonge::API.key = Access.api_key
 
@@ -180,12 +182,24 @@ def team_menu1(t)
         make_team_table1(t, answer)
 end
 
+def all_logo(team)
+    image = team.name.downcase.split(" ").join("_")
+    Catpix::print_image "assets/logos_icehockey/#{image}.gif",
+    :limit_x => 0.7,
+    :limit_y => 0.7,
+    :center_x => true,
+    :center_y => true,
+    :resolution => "high"
+end
+
 def make_team_table1(t, answer)
     if answer == "Go Back"
         round_menu1(t)
     else
+       
     team = Team.all.find_by(name: answer)
-    puts team.img_path
+   
+    # puts team.img_path
     rows = []
     rows << [team.name, team.wins, team.losses, team.games_played, team.championship_wins]
     table = Terminal::Table.new :headings => ["Name", "Wins", "Losses", "Games Played", "Championship Wins"], :rows => rows 
@@ -194,6 +208,7 @@ def make_team_table1(t, answer)
     rows2 = []
     players.each { |e| rows2 << [e.name, e.series_goals, e.total_goals]} # add goals per game
     table2 = Terminal::Table.new :headings => ["Name", "Series Goals", "Total Goals"], :rows => rows2 
+    all_logo(team)
     puts table2
     team_menu1(t)
     end

@@ -12,6 +12,7 @@ gem "rest-client"
 gem 'artii'
 gem 'tco'
 gem 'paint'
+gem 'catpix'
 gem 'tty-prompt'
 gem 'terminal-table'
 
