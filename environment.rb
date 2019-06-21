@@ -11,7 +11,7 @@ ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'db/develo
 ActiveRecord::Base.logger = nil
 
 # ~~~~~~ Running App ~~~~~~~~ #
-require_all 'config'
+require_relative 'config/access.rb'
 require_all 'app'
 
 require_relative 'lib/cli.rb'
@@ -29,7 +29,4 @@ require_all 'lib'
 
 # ~~~~~~ Migrations ~~~~~~~~~ #
 # require_all 'db/migrate'
-
-
-
-
+# This APP isn't working for me
